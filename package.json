@@ -12,7 +12,8 @@
     "start-server": "nodemon server/server.js --watch server/*",
     "start-front": "react-scripts start",
     "start": "concurrently \"npm run start-server\" \"npm run start-front\" --kill-others --kill-others-on-fail",
-    "test": "react-scripts test --env=jsdom"
+    "test": "react-scripts test --env=jsdom",
+    "prod": "concurrently \"node server\\server.js\" \"serve -s server\\build\""
   },
   "author": "Raj Vora",
   "license": "ISC",
@@ -43,7 +44,8 @@
     "pg": "^8.13.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.1.5"
+    "react-router": "^7.1.5",
+    "serve": "^14.2.4"
   },
   "browserslist": {
     "production": [
