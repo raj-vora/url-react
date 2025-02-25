@@ -9,9 +9,9 @@ import { Redirect } from './components/redirect.tsx'
 
 // Import styles
 import './styles/styles.css'
+import HealthCheck from './components/health.tsx';
 
 export const App = () => {
-    console.log(process.env);
     // Check for authentication
     const isAuthenticated = () => {
         const token = localStorage.getItem('token');
@@ -29,6 +29,7 @@ export const App = () => {
 
     return (<BrowserRouter>
         <Routes>
+            <Route path='/status' element={<HealthCheck />} />
             <Route path='/' element={<PrivateRoutes />} />
             <Route path="/login" element={<Login />} />
             <Route path="/links" element={<Links />} />
