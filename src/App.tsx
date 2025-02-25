@@ -3,15 +3,15 @@ import React, { useContext } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, Outlet, useLocation } from 'react-router';
 
 // Import components
-import { Links } from './components/links'
-import { Login } from './components/login';
-import { Redirect } from './components/redirect'
+import { Links } from './components/links.tsx'
+import { Login } from './components/login.tsx';
+import { Redirect } from './components/redirect.tsx'
 
 // Import styles
 import './styles/styles.css'
 
 export const App = () => {
-
+    console.log(process.env);
     // Check for authentication
     const isAuthenticated = () => {
         const token = localStorage.getItem('token');

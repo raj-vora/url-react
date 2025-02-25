@@ -4,7 +4,7 @@
 import React from 'react'
 
 // Import components
-import { LinksListRow } from './links-list-row'
+import { LinksListRow } from './links-list-row.tsx'
 
 // Import styles
 import './../styles/links-list.css'

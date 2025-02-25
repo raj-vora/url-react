@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const Redirect = () => {
     const { code } = useParams()
-    const mainUrl = 'http://localhost:4001'
+    const mainUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const fetchAndRedirect = async () => {

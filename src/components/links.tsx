@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 // Import components
-import { LinksList } from './links-list'
+import { LinksList } from './links-list.tsx'
 
 // Import styles
 import './../styles/links.css'
@@ -19,7 +19,7 @@ export const Links = () => {
   const [url, setUrl] = useState('')
   const [links, setLinks] = useState([])
   const [loading, setLoading] = useState(true)
-  const mainUrl = 'http://localhost:4001';
+  const mainUrl = process.env.REACT_APP_API_URL;
 
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 

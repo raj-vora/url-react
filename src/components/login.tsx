@@ -10,7 +10,7 @@ export const Login = () => {
   const [password, setPassword] = useState('')
   const [isRegistering, setIsRegistering] = useState(false)
   const [error, setError] = useState('')
-  const mainUrl = 'http://localhost:4001'
+  const mainUrl = process.env.REACT_APP_API_URL;
 
   // Reset form
   const handleInputsReset = () => {
