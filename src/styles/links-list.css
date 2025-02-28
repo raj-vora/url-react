@@ -45,15 +45,15 @@
 
 .table-item:nth-child(2) {
   width: 10%;
-  max-width: 10%;
 }
 
 .table-item:nth-child(3) {
-  width: 10%;
+  justify-content: space-evenly;
+  width: 20%;
 }
 
 .table-item:nth-child(4) {
-  width: 50%;
+  width: 40%;
 }
 
 .table-item:nth-child(5) {

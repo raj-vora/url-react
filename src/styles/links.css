@@ -1,10 +1,25 @@
 /* url/src/styles/links.css */
 
+.alert-message {
+  color: #2980b9;
+  font-size: 14px;
+  text-align: center;
+  padding: 8px;
+  background-color: rgba(80, 211, 47, 0.1);
+  border-radius: 4px;
+}
+
+.logo {
+  max-width: 100px;
+  max-height: 100px;
+  align-self: center;
+}
+
 /* Links form */
 .link-list-wrapper {
     padding: 16px;
     margin: 64px auto 0;
-    max-width: 768px;
+    max-width: 90vw;
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
@@ -24,6 +39,7 @@
   }
   
   .form-wrapper fieldset {
+    align-self: center;
     padding: 0;
     margin: 0;
     width: 50%;
@@ -67,6 +83,17 @@
     border: 0;
     cursor: pointer;
     transition: all .25s ease-out;
+  }
+
+  .btn-copy {
+    border: 0;
+    cursor: pointer;
+    transition: all .25s ease-out;
+    padding: 12px 18px;
+    margin-left: 2vw;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 4px;
   }
   
   .btn-add {

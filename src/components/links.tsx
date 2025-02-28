@@ -1,14 +1,15 @@
 // url/src/components/links.tsx
 
 // Import deps
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import axios from 'axios'
-
+import logo from '../assets/logo.png';
 // Import components
 import { LinksList } from './links-list.tsx'
 
 // Import styles
 import './../styles/links.css'
+import { LinksListSkeleton } from './links-list-skeleton.tsx'
 
 // Create LinksList component
 export const Links = () => {
@@ -18,8 +19,8 @@ export const Links = () => {
   const [code, setCode] = useState('')
   const [url, setUrl] = useState('')
   const [links, setLinks] = useState([])
-  const [loading, setLoading] = useState(true)
   const mainUrl = process.env.REACT_APP_API_URL;
+  const [error, setError] = useState('')
 
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
@@ -37,7 +38,6 @@ export const Links = () => {
         // Update the links state
         setLinks(response.data)
         // Update loading state
-        setLoading(false)
       })
       .catch(error => console.error(`There was an error retrieving the link list: ${error}`))
   }
@@ -77,33 +77,32 @@ export const Links = () => {
 
       // Reset all input fields
       handleInputsReset()
+      // Fetch all links to refresh
+      // the links on the links list
+      fetchLinks()
     }
   }
 
   // Remove link
-  const handleLinkRemove = (id: number, code: string) => {
-    // Send PUT request to 'links/delete' endpoint
-    axios
-      .put(mainUrl + '/links/delete', { id: id })
-      .then(() => {
+  const handleLinkRemove = (code: string) => {
+    if (window.confirm(`You want to delete code "${code}" ?`)) {
+      // Send PUT request to 'links/delete' endpoint
+      axios
+        .put(mainUrl + '/links/delete', { code: code })
+        .then(() => {
 
-        // Fetch all links to refresh
-        // the links on the links list
-        fetchLinks()
-      })
-      .catch(error => console.error(`There was an error removing the ${code} link: ${error}`))
+          // Fetch all links to refresh
+          // the links on the links list
+          fetchLinks()
+        })
+        .catch(error => console.error(`There was an error removing the ${code} link: ${error}`))
+    }
+
   }
 
-  // Reset links list (remove all links)
-  const handleListReset = () => {
-    // Send PUT request to 'links/reset' endpoint
-    axios.put(mainUrl + '/links/reset')
-      .then(() => {
-        // Fetch all links to refresh
-        // the links on the links list
-        fetchLinks()
-      })
-      .catch(error => console.error(`There was an error resetting the link list: ${error}`))
+  const addAlert = (message: string) => {
+    setError(message);
+    setTimeout(() => setError(''), 3000);
   }
 
   const logout = () => {
@@ -115,9 +114,11 @@ export const Links = () => {
   return (
     <div className="link-list-wrapper">
       {/* Form for creating new link */}
+      {error && <div className="alert-message">{error}</div>}
       <div className="link-list-form">
         <div className="form-wrapper" onSubmit={handleLinkSubmit}>
           <div className="form-row">
+            <img className="logo" src={logo} />
             <fieldset>
               <label className="form-label" htmlFor="code">Enter code:</label>
               <input className="form-input" type="text" id="code" name="code" value={code} onChange={(e) => setCode(e.currentTarget.value)} />
@@ -133,7 +134,7 @@ export const Links = () => {
       </div>
 
       {/* Render links list component */}
-      <LinksList links={links} loading={loading} handleLinkRemove={handleLinkRemove} />
+      <Suspense fallback={<LinksListSkeleton />}><LinksList links={links} handleLinkRemove={handleLinkRemove} addAlert={addAlert} /></Suspense>
 
       <button onClick={logout} className='btn btn-reset'>Logout</button>
     </div>

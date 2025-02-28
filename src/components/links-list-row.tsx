@@ -13,7 +13,8 @@ interface LinksListRowUI {
     url: string;
     clicks: number;
   }
-  handleLinkRemove: (id: number, code: string) => void;
+  handleLinkRemove: (code: string) => void;
+  addAlert: (message: string) => void;
 }
 
 // Create LinksListRow component
@@ -30,6 +31,11 @@ export const LinksListRow = (props: LinksListRowUI) => (
 
     <td className="table-item">
       <a href={props.link.code} target='_blank'>{props.link.code}</a>
+      <button
+        className="btn-copy"
+        onClick={() => { window.navigator.clipboard.writeText(window.location.host + "/" + props.link.code); props.addAlert('Link copied to clipboard') }}>
+        Copy
+      </button>
     </td>
 
 
@@ -45,7 +51,7 @@ export const LinksListRow = (props: LinksListRowUI) => (
     <td className="table-item">
       <button
         className="btn btn-remove"
-        onClick={() => props.handleLinkRemove(props.link.id, props.link.code)}>
+        onClick={() => props.handleLinkRemove(props.link.code)}>
         Remove link
       </button>
     </td>

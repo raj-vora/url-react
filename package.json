@@ -6,7 +6,8 @@
   "main": "src/index.tsx",
   "prox": "http://localhost:4000",
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "author": "Raj Vora",
   "license": "ISC",

@@ -20,14 +20,13 @@ interface LinkUI {
 
 interface LinkListUI {
   links: LinkUI[];
-  loading: boolean;
-  handleLinkRemove: (id: number, code: string) => void;
+  handleLinkRemove: (code: string) => void;
+  addAlert: (message: string) => void;
 }
 
 // Create LinksList component
 export const LinksList = (props: LinkListUI) => {
   // Show loading message
-  if (props.loading) return <p>Links table is loading...</p>
 
   return (
     <table className="table">
@@ -42,6 +41,7 @@ export const LinksList = (props: LinkListUI) => {
             <th className="table-head-item">Link</th>
 
             <th className="table-head-item" >Click Count</th>
+            
             <th className="table-head-item" />
           </tr>
         </thead>
@@ -50,7 +50,8 @@ export const LinksList = (props: LinkListUI) => {
           {props.links.length > 0 ? (
             props.links.map((link: LinkUI, idx) => (
               <LinksListRow
-                key={link.id}
+                addAlert={props.addAlert}
+                key={link.code}
                 link={link}
                 position={idx + 1}
                 handleLinkRemove={props.handleLinkRemove}
