@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './../styles/login.css'
+import logo from '../assets/logo.png';
 
 // Create Login component
 export const Login = () => {
@@ -37,10 +38,10 @@ export const Login = () => {
         password
       })
 
-      if(response.status == 401)
+      if (response.status == 401)
         setIsRegistering(true);
       handleInputsReset()
-      
+
       // Here you can handle successful login/register
       // For example, store token in localStorage and redirect
       if (response.data.token) {
@@ -58,11 +59,13 @@ export const Login = () => {
 
   return (
     <div className="login-wrapper">
-      <h2>{isRegistering ? 'Register' : 'Login'}</h2>
-      
+
+
       <form className="login-form" onSubmit={handleSubmit}>
+        <img className="logo" src={logo} />
+        <h2>{isRegistering ? 'Register' : 'Login'}</h2>
         {error && <div className="error-message">{error}</div>}
-        
+
         <div className="form-row">
           <label className="form-label" htmlFor="username">Username:</label>
           <input
