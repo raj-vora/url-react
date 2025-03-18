@@ -33,7 +33,7 @@ export const LinksListRow = (props: LinksListRowUI) => (
       <a href={props.link.code} target='_blank'>{props.link.code}</a>
       <button
         className="btn-copy"
-        onClick={() => { window.navigator.clipboard.writeText(window.location.host + "/" + props.link.code); props.addAlert('Link copied to clipboard') }}>
+        onClick={() => { window.navigator.clipboard.writeText(window.location.origin + "/" + props.link.code); props.addAlert('Link copied to clipboard') }}>
         Copy
       </button>
     </td>
